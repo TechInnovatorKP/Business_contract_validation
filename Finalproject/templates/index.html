@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contract Validator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      height: 100%;
+    }
+
+    body {
+      background-image: url("{{ url_for('static', filename='Bg_image.jpeg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.35);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      background-color: rgba(236, 226, 202, 0.9);  /* updated goldenish box */
+      padding: 50px 60px;
+      border-radius: 15px;
+      max-width: 900px; /* updated width */
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #2D3E50;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    select, input[type="file"] {
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .button {
+      background-color: #9d530ab9;  /* golden brown like your screenshot */
+      color: white;
+      padding: 14px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #edc17f;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #777;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>Business Contract Validation</h1>
+
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="contract_type" style="font-weight: bold; color: #2D3E50;">Select Contract Type:</label>
+        <select name="contract_type" id="contract_type" required>
+          <option value="" disabled selected>Select contract type</option>
+          <option value="Affiliate">Affiliate</option>
+          <option value="Employment">Employment</option>
+          <option value="NDA">NDA</option>
+          <option value="Partnership">Partnership</option>
+          <option value="Service Agreement">Service Agreement</option>
+        </select>
+
+        <label for="contract" style="font-weight: bold; color: #2D3E50;">Upload Contract Document:</label>
+        <input type="file" name="contract" id="contract" accept="application/pdf" required>
+
+        <button type="submit" class="button">Validate Contract</button>
+      </form>
+
+      <footer>
+        <p>&copy; 2025 Contract Validator | All Rights Reserved</p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

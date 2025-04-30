@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contract Analysis Report</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      height: 100%;
+    }
+
+    body {
+      background-image: url("{{ url_for('static', filename='Bg_image.jpeg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.35);
+      min-height: 100vh;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      padding: 30px 0 0 0;
+      font-size: 28px;
+    }
+
+    .container {
+      background-color: rgba(236, 226, 202, 0.95);  /* light golden box */
+      padding: 50px 60px;
+      border-radius: 15px;
+      max-width: 1000px;
+      margin: 40px auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+      color: #2D3E50;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #2D3E50;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #9d530ab9;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #edc17f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: white;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>Contract Analysis Report</h1>
+    </header>
+
+    <div class="container">
+      <div class="summary">
+        <h3>Contract Summary</h3>
+        <p><strong>Total Clauses:</strong> {{ num_clauses }}</p>
+        <p><strong>High Risk Clauses:</strong> {{ num_risky_clauses }}</p>
+        
+      </div>
+
+      <div class="clauses-list">
+        <h3>Clauses Needing Changes</h3>
+        <ul>
+          {% for clause in clauses_needing_changes %}
+            <li>{{ clause }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="risk-distribution">
+        <h3>Risk Distribution</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Risk Level</th>
+              <th>Number of Clauses</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for level, count in risk_distribution.items() %}
+              <tr>
+                <td>{{ level|capitalize }}</td>
+                <td>{{ count }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="detailed-analysis">
+        <h3>Detailed Clause Analysis</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Clause</th>
+              <th>Risk Level</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in detailed_analysis %}
+              <tr>
+                <td>{{ item.clause }}</td>
+                <td>{{ item.risk_level }}</td>
+                <td>{{ item.suggestion }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Contract Validator | All Rights Reserved</p>
+    </footer>
+  </div>
+</body>
+</html>
